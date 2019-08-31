@@ -22,7 +22,7 @@ import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
 import com.yanzhenjie.kalle.Kalle;
 import com.yanzhenjie.kalle.KalleConfig;
-import com.yanzhenjie.kalle.OkHttpConnectFactory;
+//import com.yanzhenjie.kalle.OkHttpConnectFactory;
 import com.yanzhenjie.kalle.connect.BroadcastNetwork;
 import com.yanzhenjie.kalle.connect.http.LoggerInterceptor;
 import com.yanzhenjie.kalle.cookie.DBCookieStore;
@@ -55,7 +55,7 @@ public class App extends Application {
 
     private void kalle() {
         Kalle.setConfig(KalleConfig.newBuilder()
-            .connectFactory(OkHttpConnectFactory.newBuilder().build())
+            //.connectFactory(OkHttpConnectFactory.newBuilder().build())
             .cookieStore(DBCookieStore.newBuilder(this).build())
             .cacheStore(DiskCacheStore.newBuilder(AppConfig.get().PATH_APP_CACHE).build())
             .network(new BroadcastNetwork(this))

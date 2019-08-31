@@ -32,8 +32,9 @@ android {
 }
 
 dependencies {
-    implementation rootProject.ext.dependencies.kalle
-    implementation rootProject.ext.dependencies.okalle
+    //implementation rootProject.ext.dependencies.kalle
+    implementation project(':kalle')
+    //implementation rootProject.ext.dependencies.okalle
 
     implementation rootProject.ext.dependencies.material
     implementation rootProject.ext.dependencies.appCompat

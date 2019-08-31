@@ -91,7 +91,8 @@ public class FormPresenter extends BaseActivity implements Contract.FormPresente
     }
 
     private void executeUpload() {
-        FileBinary binary1 = new FileBinary(new File(mAlbumList.get(0).getPath())).onProgress(
+        FileBinary binary1 = new FileBinary(new File(mAlbumList.get(0).getPath()));
+        binary1.onProgress(
             new ProgressBar<FileBinary>() {
                 @Override
                 public void progress(FileBinary origin, int progress) {
@@ -101,7 +102,8 @@ public class FormPresenter extends BaseActivity implements Contract.FormPresente
             });
         FileBinary binary2 = null;
         if (mAlbumList.size() > 1) {
-            binary2 = new FileBinary(new File(mAlbumList.get(1).getPath())).onProgress(new ProgressBar<FileBinary>() {
+            binary2 = new FileBinary(new File(mAlbumList.get(1).getPath()));
+            binary2.onProgress(new ProgressBar<FileBinary>() {
                 @Override
                 public void progress(FileBinary origin, int progress) {
                     mFileItems.get(1).setProgress(progress);
@@ -111,7 +113,8 @@ public class FormPresenter extends BaseActivity implements Contract.FormPresente
         }
         FileBinary binary3 = null;
         if (mAlbumList.size() > 2) {
-            binary3 = new FileBinary(new File(mAlbumList.get(2).getPath())).onProgress(new ProgressBar<FileBinary>() {
+            binary3 = new FileBinary(new File(mAlbumList.get(2).getPath()));
+            binary3.onProgress(new ProgressBar<FileBinary>() {
                 @Override
                 public void progress(FileBinary origin, int progress) {
                     mFileItems.get(2).setProgress(progress);
