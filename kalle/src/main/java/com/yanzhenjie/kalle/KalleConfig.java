@@ -53,12 +53,23 @@ import static com.yanzhenjie.kalle.Headers.VALUE_USER_AGENT;
 /**
  * <p>Initialize the save parameters.</p>
  * Created by Zhenjie Yan on 2017/6/14.
+ *
+ *
+ * Edit by loongg-max on 19.08.31
+ * <br>修改增加 path 最后是否带斜杠的设置
+ * <br>在设置config的时候设置全局效果（不设置默认false），或者每个请求前都可以设置是否带斜杠，然后请求完毕后可以设置回来。
  */
 public final class KalleConfig {
 
     public static Builder newBuilder() {
         return new Builder();
     }
+
+    /**
+     * Add by loongg-max on 19.08.31
+     * <br>path 最后是否带斜杠
+     * */
+    private boolean mPathEndWithSlash;
 
     private final Executor mWorkExecutor;
     private final Executor mMainExecutor;
@@ -82,6 +93,12 @@ public final class KalleConfig {
     private final Converter mConverter;
 
     private KalleConfig(Builder builder) {
+
+        /**
+         * Add by loongg-max on 19.08.31
+         * */
+        this.mPathEndWithSlash = builder.mPathEndWithSlash;
+
         this.mWorkExecutor = builder.mWorkExecutor == null ? new WorkExecutor() : builder.mWorkExecutor;
         this.mMainExecutor = builder.mMainExecutor == null ? new MainExecutor() : builder.mMainExecutor;
 
@@ -102,6 +119,19 @@ public final class KalleConfig {
         this.mInterceptors = Collections.unmodifiableList(builder.mInterceptors);
 
         this.mConverter = builder.mConverter == null ? Converter.DEFAULT : builder.mConverter;
+    }
+
+    /**
+     * Add by loongg-max on 19.08.31
+     * @return boolean
+     * <br>得到 path 最后是否带斜杠的boolean
+     * */
+    public boolean getPathEndWithSlash(){
+        return mPathEndWithSlash;
+    }
+
+    public void setPathEndWithSlash(boolean pathEndWithSlash){
+        this.mPathEndWithSlash = pathEndWithSlash;
     }
 
     public Executor getWorkExecutor() {
@@ -170,6 +200,12 @@ public final class KalleConfig {
 
     public final static class Builder {
 
+        /**
+         * Add by loongg-max on 19.08.31
+         * <br>path 最后是否带斜杠
+         * */
+        private boolean mPathEndWithSlash;
+
         private Executor mWorkExecutor;
         private Executor mMainExecutor;
 
@@ -203,6 +239,15 @@ public final class KalleConfig {
             mHeaders.set(KEY_USER_AGENT, VALUE_USER_AGENT);
             mHeaders.set(KEY_ACCEPT_LANGUAGE, VALUE_ACCEPT_LANGUAGE);
         }
+        /**
+         * Add by loongg-max on 19.08.31
+         * <br>设置 path 最后是否带斜杠
+         * */
+        public Builder setPathEndWithSlash(boolean pathEndWithSlash){
+            this.mPathEndWithSlash = pathEndWithSlash;
+            return this;
+        }
+
 
         /**
          * Set global work thread executor.

@@ -54,6 +54,14 @@ import java.util.Map;
  * The new url is: <code>http://www.example.com/get?name=abc</code>.
  * </pre>
  * Created by Zhenjie Yan on 2018/2/9.
+ *
+ *
+ * <br>----------------------------------------------------
+ *
+ * <br>Edit by loongg-max on 19.08.31
+ * <br>增加根据设置里面的PathEndWithSlash决定path后面是否带斜杠/
+ * <br>每个请求前都可以设置是否带斜杠，然后请求完毕后可以设置回来，或者直接在config的时候设置全局效果（默认false）
+ *
  */
 public class Url {
 
@@ -368,13 +376,17 @@ public class Url {
         return (port <= 0 || port == 80) ? "" : String.format(Locale.getDefault(), ":%d", port);
     }
 
+    /**
+     * Edit by loongg-max on 19.08.31
+     * 增加根据设置里面的PathEndWithSlash决定path后面是否带斜杠/
+     * */
     private static String wrapPath(List<String> pathList, boolean encode) {
         if (pathList.isEmpty()) return "/";
         StringBuilder builder = new StringBuilder();
         for (String path : pathList) {
             builder.append("/").append(encode ? Uri.encode(path) : path);
         }
-        return builder.toString();
+        return Kalle.getConfig().getPathEndWithSlash()? builder.toString() + "/" : builder.toString();
     }
 
     private static String wrapQuery(Params params, boolean encode) {
